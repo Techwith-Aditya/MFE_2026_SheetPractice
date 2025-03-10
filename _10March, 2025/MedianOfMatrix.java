@@ -2,31 +2,31 @@ import java.util.*;
 
 public class Solution {
     public int findMedian(ArrayList<ArrayList<Integer>> A) {
-        int n = A.size();
-        int m = A.get(0).size();
+        int n=A.size();
+        int m=A.get(0).size();
         
-        int low = Integer.MAX_VALUE, high = Integer.MIN_VALUE;
+        int low=Integer.MAX_VALUE, high=Integer.MIN_VALUE;
         
-        for(int i = 0; i < n; i++)
+        for(int i=0; i<n; i++)
         {
-            low = Math.min(low, A.get(i).get(0));
-            high = Math.max(high, A.get(i).get(m - 1));
+            low=Math.min(low, A.get(i).get(0));
+            high=Math.max(high, A.get(i).get(m-1));
         }
         
-        int req = (n * m) / 2;
+        int req=(n*m)/2;
         
         while(low <= high)
         {
-            int mid = (low + high) / 2;
-            int smallEqual = countSmallEqual(A, n, m, mid);
+            int mid=(low+high)/2;
+            int smallEqual=countSmallEqual(A, n, m, mid);
             
-            if(smallEqual <= req)
+            if(smallEqual<=req)
             {
-                low = mid + 1;
+                low=mid+1;
             }
             else
             {
-                high = mid - 1;
+                high=mid-1;
             }
         }
         
@@ -34,32 +34,32 @@ public class Solution {
     }
     
     private int countSmallEqual(ArrayList<ArrayList<Integer>> matrix, int n, int m, int x) {
-        int cnt = 0;
+        int cnt=0;
         
-        for(int i = 0; i < n; i++)
+        for(int i=0; i<n; i++)
         {
-            cnt += upperBound(matrix.get(i), x, m);
+            cnt=cnt+upperBound(matrix.get(i), x, m);
         }
         
         return cnt;
     }
     
     private int upperBound(ArrayList<Integer> arr, int x, int n) {
-        int low = 0, high = n - 1;
-        int ans = n;
+        int low=0, high=n-1;
+        int ans=n;
         
         while(low <= high)
         {
-            int mid = (low + high) / 2;
+            int mid=(low+high)/2;
             
-            if(arr.get(mid) > x)
+            if(arr.get(mid)>x)
             {
-                ans = mid;
-                high = mid - 1;
+                ans=mid;
+                high=mid-1;
             }
             else
             {
-                low = mid + 1;
+                low=mid+1;
             }
         }
         
